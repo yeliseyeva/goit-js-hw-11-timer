@@ -9,7 +9,7 @@ const timer = {
     start() {
         setInterval(() => {
             const currentTime = Date.now();
-            const finishTime = new Date(2021, 9, 31);
+            const finishTime = new Date(2021, 9, 30);
             const deltaTime = finishTime - currentTime;
             const {days, hours, mins, secs} = getTimeComponents(deltaTime)
 
