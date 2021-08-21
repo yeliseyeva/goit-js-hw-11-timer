@@ -1,13 +1,22 @@
+const refs = {
+    day: document.querySelector('[data-value="days"]'),
+    hour: document.querySelector('[data-value="hours"]'),
+    min: document.querySelector('[data-value="mins"]'),
+    sec: document.querySelector('[data-value="secs"]')
+};
+
 const timer = {
     start() {
-        const startTime = Date.now();
-
         setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = currentTime - startTime;
-            const {hours, mins, secs} = getTimeComponents(deltaTime)
+            const finishTime = new Date(2021, 9, 31);
+            const deltaTime = finishTime - currentTime;
+            const {days, hours, mins, secs} = getTimeComponents(deltaTime)
 
-            console.log(`${hours}:${mins}:${secs}`);
+            refs.day.textContent = `${days}`;
+            refs.hour.textContent = `${hours}`;
+            refs.min.textContent = `${mins}`;
+            refs.sec.textContent = `${secs}`;
         }, 1000)
     }
 }
@@ -19,9 +28,10 @@ function pad(value) {
 }
     
 function getTimeComponents(time) {
+    const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)))
     const hours = pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
     const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = pad(Math.floor((time % (1000 * 60)) / 1000 ));
 
-    return {hours, mins, secs}
+    return {days, hours, mins, secs}
 }
